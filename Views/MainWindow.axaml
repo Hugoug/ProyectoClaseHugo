@@ -1,0 +1,158 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:ProyectoClaseHugo.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:visualBasic="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core"
+        mc:Ignorable="d" d:DesignWidth="850" d:DesignHeight="500"
+        x:Class="ProyectoClaseHugo.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="ProyectoClaseHugo">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+    
+
+    <UniformGrid Columns="3">
+        <Border Margin="15" 
+                Padding="20"
+                CornerRadius="20"
+                BorderBrush="DarkGray"
+                BorderThickness="1"
+                BoxShadow="5 10 20 0 DarkGray">
+            
+            <!-- Inicio Contenedor del formulario-->
+            <StackPanel>
+            <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>           
+            <TextBlock Text="{Binding Saludo}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            
+            <!--Entrada de texto para nombre del pokemon -->
+            <TextBox Width="200"
+                     Margin="10"
+                     Text="{Binding Poke.Nombre}"
+                     HorizontalAlignment="Center"/>
+            
+            <!--selector de tipo -->
+            <ComboBox Width="200" SelectedIndex="0"
+                      SelectedItem="{Binding Poke.Tipo}"
+                      ItemsSource="{Binding ListaTipos}"
+                      HorizontalAlignment="Center"/>
+            
+            <!-- Selector de fecha 
+            <CalendarDatePicker HorizontalAlignment="Center" 
+                                SelectedDate="{Binding Boli.Fecha}"
+                                Width="200">
+               
+            </CalendarDatePicker>-->
+           
+            <!-- Check para opciones avanzadas -->
+            <CheckBox Content="Opciones Avanzadas"
+                      HorizontalAlignment="Center"
+                      Margin="10"
+                      Width="200"
+                      Command="{Binding mostrarOpcionesAvanzadasCommand}"
+                      Name="avanzadas"/>
+            
+            <StackPanel HorizontalAlignment="Center"
+                        IsVisible="{Binding Avanzadas}"
+                        Orientation="Horizontal" 
+                        Width="200">
+                <TextBox HorizontalAlignment="Center"
+                         Margin="0,5,0,5" 
+                         Width="95"/>
+                <TextBox HorizontalAlignment="Center"
+                         Margin="5,5,0,5" 
+                         Width="100"/>
+            </StackPanel>
+            
+            <CheckBox Content="Aceptar condiciones"
+                      HorizontalAlignment="Center"
+                      Margin="0"
+                      Width="200"
+                      Command="{Binding estadoInicialCheckCommand}"
+                      CommandParameter="{Binding ElementName=Condiciones}"
+                      Name="Condiciones"/>
+            
+            <TextBlock Text="{Binding Mensaje}"
+                       Foreground="DarkRed"
+                       HorizontalAlignment="Center"/>
+            
+            <Button Width="200"
+                    Margin="10"
+                    Content="CREAR"
+                    IsVisible="{Binding ModoCrear}"
+                    Command="{Binding MostrarPokeCommand}"
+                    CommandParameter="{Binding ElementName=Condiciones}"
+                    HorizontalAlignment="Center"
+                    HorizontalContentAlignment="Center"/>
+            
+            <Button Width="200"
+                    IsVisible="{Binding ModoEditar}"
+                    Margin="10"
+                    Content="EDITAR"
+                    HorizontalAlignment="Center"
+                    HorizontalContentAlignment="Center"/>
+            
+            <Button Width="200"
+                    IsVisible="{Binding ModoEditar}"
+                    Margin="10"
+                    Content="CANCELAR"
+                    HorizontalAlignment="Center"
+                    HorizontalContentAlignment="Center"/>
+            
+        </StackPanel>
+        <!-- Fin Contenedor del formulario-->
+        </Border>              
+        <!-- Incio Contenedor Consultas -->
+           <StackPanel>
+               <ComboBox ItemsSource="{Binding Pokemons}"
+                         IsVisible="False"/>
+               <ListBox Background="Transparent"
+                        Height="350"
+                        SelectedItem="{Binding PokeSeleccionado}"
+                        ItemsSource="{Binding Pokemons}">
+                  <visualBasic:Interaction.Behaviors>
+                       <EventTriggerBehavior EventName="DoubleTapped">
+                           <InvokeCommandAction Command="{Binding CargarPokeSeleccionadoCommand}"/>
+                       </EventTriggerBehavior>
+                   </visualBasic:Interaction.Behaviors> 
+
+                   <ItemsControl.ItemsPanel>
+                       <ItemsPanelTemplate>
+                           <WrapPanel/>
+                       </ItemsPanelTemplate>
+                   </ItemsControl.ItemsPanel>
+
+                   <ItemsControl.ItemTemplate>
+                       <DataTemplate>
+                           <Border Margin="5" 
+                                   Padding="15"
+                                   CornerRadius="10"
+                                   BorderBrush="DarkGray"
+                                   BorderThickness="1"
+                                   BoxShadow="5 10 15 0 DarkGray">
+                               <StackPanel>
+                                   <Image Width="50" 
+                                          Source="avares://ProyectoClaseHugo/Assets/logoPokemon.png"/>
+
+                                   <TextBlock HorizontalAlignment="Center"
+                                              Text="{Binding Nombre}"/>
+                                   <TextBlock HorizontalAlignment="Center"
+                                              Text="{Binding Tipo}"/>
+                                   <TextBlock HorizontalAlignment="Center"
+                                              Text="{Binding Shiny}"/>
+                               </StackPanel>
+                           </Border>
+                       </DataTemplate>
+                   </ItemsControl.ItemTemplate>
+               </ListBox>
+           </StackPanel>
+           <!-- Fin Contenedor Consultas -->
+                       
+    </UniformGrid>
+    
+</Window>
