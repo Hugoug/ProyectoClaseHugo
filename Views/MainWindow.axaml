@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:visualBasic="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core"
-        mc:Ignorable="d" d:DesignWidth="850" d:DesignHeight="500"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="550"
         x:Class="ProyectoClaseHugo.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
@@ -17,7 +17,7 @@
     </Design.DataContext>
     
 
-    <UniformGrid Columns="3">
+    <UniformGrid Rows="2">
         <Border Margin="15" 
                 Padding="20"
                 CornerRadius="20"
@@ -165,19 +165,7 @@
            </ListBox>
         </StackPanel>
             <!-- Fin Contenedor Consultas -->
-            
-            <!-- Inicio Contenedor informativo-->
-            <StackPanel Orientation="Vertical">
-                <Border Margin="15" 
-                        Padding="20"
-                        CornerRadius="15"
-                        BorderBrush="DarkGray"
-                        BorderThickness="1"
-                        BoxShadow="5 10 20 0 DarkGray">
-                    
-                </Border>
-            </StackPanel>
-            <!-- Fin Contenedor informativo-->
+        
                        
     </UniformGrid>
     
