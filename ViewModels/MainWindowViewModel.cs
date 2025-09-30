@@ -18,15 +18,14 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty]
     private string mensaje  = string.Empty;
 
-    [ObservableProperty] private bool avanzadas = false;
+    [ObservableProperty] private bool habilidades = false;
     
     [ObservableProperty] private ObservableCollection<Pokemon> pokemons = new();
 
     [ObservableProperty] private bool modoCrear = true; 
     [ObservableProperty] private bool modoEditar = false;    
     
-    public string Greeting { set; get; } = "REGISTRA TU POKEMON";
-    public string Saludo { set; get; } = "100% fiable y gratuito";
+    public string Greeting { set; get; } = "¡REGISTRA TU POKEMON!";
     
     [ObservableProperty]
     private Pokemon poke = new();
@@ -41,6 +40,8 @@ public partial class MainWindowViewModel : ViewModelBase
         CargarCombo();
         CargarPokemons();
     }
+    
+   
 
     /*[RelayCommand]
     public void ComprobarFecha()
@@ -66,13 +67,13 @@ public partial class MainWindowViewModel : ViewModelBase
         Pokemon poke = new Pokemon();
         poke.Nombre = "Pokugo";
         poke.Tipo = "Fantasma";
-        poke.Shiny = true;
+        poke.Shiny = "Shiny";
         Pokemons.Add(poke);
         
         Pokemon poke2 = new Pokemon();
         poke2.Nombre = "ug";
         poke2.Tipo = "Fuego";
-        poke2.Shiny = false;
+        poke2.Shiny = "No Shiny";
         Pokemons.Add(poke2);
         
 
@@ -88,15 +89,15 @@ public partial class MainWindowViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    public void mostrarOpcionesAvanzadas()
+    public void asignarHabilidades()
     {
-        if (Avanzadas)
+        if (habilidades)
         {
-            Avanzadas = false;
+            habilidades = false;
         }
         else
         {
-            Avanzadas = true;
+            habilidades = true;
         }
     }
     

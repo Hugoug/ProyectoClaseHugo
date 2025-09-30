@@ -24,11 +24,10 @@
                 BorderBrush="DarkGray"
                 BorderThickness="1"
                 BoxShadow="5 10 20 0 DarkGray">
-            
             <!-- Inicio Contenedor del formulario-->
             <StackPanel>
             <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>           
-            <TextBlock Text="{Binding Saludo}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
             
             <!--Entrada de texto para nombre del pokemon -->
             <TextBox Width="200"
@@ -49,18 +48,25 @@
                
             </CalendarDatePicker>-->
            
-            <!-- Check para opciones avanzadas -->
-            <CheckBox Content="Opciones Avanzadas"
+            <!-- Check para asignar habilidades -->
+            <CheckBox Content="¿Asignar habilidades? 💪"
                       HorizontalAlignment="Center"
                       Margin="10"
                       Width="200"
-                      Command="{Binding mostrarOpcionesAvanzadasCommand}"
-                      Name="avanzadas"/>
+                      Command="{Binding asignarHabilidadesCommand}"
+                      Name="Habilidades"/>
             
             <StackPanel HorizontalAlignment="Center"
-                        IsVisible="{Binding Avanzadas}"
+                        IsVisible="{Binding Habilidades}"
                         Orientation="Horizontal" 
                         Width="200">
+                <TextBox HorizontalAlignment="Center"
+                         Margin="0,5,0,5" 
+                         Width="95"/>
+                <TextBox HorizontalAlignment="Center"
+                         VerticalAlignment="Bottom"
+                         Margin="5,5,0,5" 
+                         Width="100"/>
                 <TextBox HorizontalAlignment="Center"
                          Margin="0,5,0,5" 
                          Width="95"/>
@@ -68,6 +74,12 @@
                          Margin="5,5,0,5" 
                          Width="100"/>
             </StackPanel>
+            
+            <CheckBox Content="¿Es Pokemon Shiny? ✨"
+                      HorizontalAlignment="Center"
+                      Margin="10"
+                      Width="200"
+                      Name="Shiny"/>
             
             <CheckBox Content="Aceptar condiciones"
                       HorizontalAlignment="Center"
@@ -103,55 +115,69 @@
                     Content="CANCELAR"
                     HorizontalAlignment="Center"
                     HorizontalContentAlignment="Center"/>
-            
         </StackPanel>
+        </Border>
+        
         <!-- Fin Contenedor del formulario-->
-        </Border>              
+                      
         <!-- Incio Contenedor Consultas -->
-           <StackPanel>
-               <ComboBox ItemsSource="{Binding Pokemons}"
-                         IsVisible="False"/>
-               <ListBox Background="Transparent"
-                        Height="350"
-                        SelectedItem="{Binding PokeSeleccionado}"
-                        ItemsSource="{Binding Pokemons}">
-                  <visualBasic:Interaction.Behaviors>
-                       <EventTriggerBehavior EventName="DoubleTapped">
-                           <InvokeCommandAction Command="{Binding CargarPokeSeleccionadoCommand}"/>
-                       </EventTriggerBehavior>
-                   </visualBasic:Interaction.Behaviors> 
+        <StackPanel>
+           <ComboBox ItemsSource="{Binding Pokemons}"
+                     IsVisible="False"/>
+           <ListBox Background="Transparent"
+                    Height="350"
+                    SelectedItem="{Binding PokeSeleccionado}"
+                    ItemsSource="{Binding Pokemons}">
+              <Interaction.Behaviors>
+                   <EventTriggerBehavior EventName="DoubleTapped">
+                       <InvokeCommandAction Command="{Binding CargarPokeSeleccionadoCommand}"/>
+                   </EventTriggerBehavior>
+               </Interaction.Behaviors> 
 
-                   <ItemsControl.ItemsPanel>
-                       <ItemsPanelTemplate>
-                           <WrapPanel/>
-                       </ItemsPanelTemplate>
-                   </ItemsControl.ItemsPanel>
+               <ItemsControl.ItemsPanel>
+                   <ItemsPanelTemplate>
+                       <WrapPanel/>
+                   </ItemsPanelTemplate>
+               </ItemsControl.ItemsPanel>
 
-                   <ItemsControl.ItemTemplate>
-                       <DataTemplate>
-                           <Border Margin="5" 
-                                   Padding="15"
-                                   CornerRadius="10"
-                                   BorderBrush="DarkGray"
-                                   BorderThickness="1"
-                                   BoxShadow="5 10 15 0 DarkGray">
-                               <StackPanel>
-                                   <Image Width="50" 
-                                          Source="avares://ProyectoClaseHugo/Assets/logoPokemon.png"/>
+               <ItemsControl.ItemTemplate>
+                   <DataTemplate>
+                       <Border Margin="5" 
+                               Padding="15"
+                               CornerRadius="10"
+                               BorderBrush="DarkGray"
+                               BorderThickness="1"
+                               BoxShadow="5 10 15 0 DarkGray">
+                           <StackPanel>
+                               <Image Width="50" 
+                                      Source="avares://ProyectoClaseHugo/Assets/logoPokemon.png"/>
 
-                                   <TextBlock HorizontalAlignment="Center"
-                                              Text="{Binding Nombre}"/>
-                                   <TextBlock HorizontalAlignment="Center"
-                                              Text="{Binding Tipo}"/>
-                                   <TextBlock HorizontalAlignment="Center"
-                                              Text="{Binding Shiny}"/>
-                               </StackPanel>
-                           </Border>
-                       </DataTemplate>
-                   </ItemsControl.ItemTemplate>
-               </ListBox>
-           </StackPanel>
-           <!-- Fin Contenedor Consultas -->
+                               <TextBlock HorizontalAlignment="Center"
+                                          Text="{Binding Nombre}"/>
+                               <TextBlock HorizontalAlignment="Center"
+                                          Text="{Binding Tipo}"/>
+                               <TextBlock HorizontalAlignment="Center"
+                                          Text="{Binding Shiny}"/>
+                           </StackPanel>
+                       </Border>
+                   </DataTemplate>
+               </ItemsControl.ItemTemplate>
+           </ListBox>
+        </StackPanel>
+            <!-- Fin Contenedor Consultas -->
+            
+            <!-- Inicio Contenedor informativo-->
+            <StackPanel Orientation="Vertical">
+                <Border Margin="15" 
+                        Padding="20"
+                        CornerRadius="15"
+                        BorderBrush="DarkGray"
+                        BorderThickness="1"
+                        BoxShadow="5 10 20 0 DarkGray">
+                    
+                </Border>
+            </StackPanel>
+            <!-- Fin Contenedor informativo-->
                        
     </UniformGrid>
     
