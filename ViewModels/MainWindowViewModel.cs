@@ -23,7 +23,8 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty] private ObservableCollection<Pokemon> pokemons = new();
 
     [ObservableProperty] private bool modoCrear = true; 
-    [ObservableProperty] private bool modoEditar = false;    
+    [ObservableProperty] private bool modoEditar = false;
+    
     
     public string Greeting { set; get; } = "¡REGISTRA TU POKEMON!";
     
@@ -91,13 +92,13 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     public void asignarHabilidades()
     {
-        if (habilidades)
+        if (Habilidades)
         {
-            habilidades = false;
+            Habilidades = false;
         }
         else
         {
-            habilidades = true;
+            Habilidades = true;
         }
     }
     
