@@ -26,7 +26,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty] private bool modoEditar = false;
     
     
-    public string Greeting { set; get; } = "¡REGISTRA TU POKEMON!";
+    public string Greeting { set; get; } = "¡CREA TU POKESPECIE!";
     
     [ObservableProperty]
     private Pokemon poke = new();

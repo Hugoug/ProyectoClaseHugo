@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:visualBasic="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="550"
+        mc:Ignorable="d" d:DesignWidth="750" d:DesignHeight="600"
         x:Class="ProyectoClaseHugo.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
@@ -18,109 +18,9 @@
     
 
     <UniformGrid Rows="2">
-        <Border Margin="15" 
-                Padding="20"
-                CornerRadius="20"
-                BorderBrush="red"
-                BorderThickness="1"
-                BoxShadow="5 10 20 0 DarkGray">
-            <!-- Inicio Contenedor del formulario-->
-            <StackPanel>
-            <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>           
-
+       
             
-            <!--Entrada de texto para nombre del pokemon -->
-            <TextBox Width="200"
-                     Margin="10"
-                     Text="{Binding Poke.Nombre}"
-                     HorizontalAlignment="Center"/>
-            
-            <!--selector de tipo -->
-            <ComboBox Width="200" SelectedIndex="0"
-                      SelectedItem="{Binding Poke.Tipo}"
-                      ItemsSource="{Binding ListaTipos}"
-                      HorizontalAlignment="Center"/>
-            
-            <!-- Selector de fecha 
-            <CalendarDatePicker HorizontalAlignment="Center" 
-                                SelectedDate="{Binding Boli.Fecha}"
-                                Width="200">
-               
-            </CalendarDatePicker>-->
-           
-            <!-- Check para asignar habilidades -->
-            <CheckBox Content="¿Asignar habilidades? 💪"
-                      HorizontalAlignment="Center"
-                      Margin="10"
-                      Width="200"
-                      Command="{Binding asignarHabilidadesCommand}"
-                      Name="Habilidades"/>
-            
-            <StackPanel HorizontalAlignment="Center"
-                        IsVisible="{Binding Habilidades}"
-                        Orientation="Vertical" 
-                        Width="200">
-                <TextBox HorizontalAlignment="Center"
-                         Margin="0,5,0,5" 
-                         Width="150"/>
-                <TextBox HorizontalAlignment="Center"
-                         VerticalAlignment="Bottom"
-                         Margin="5,5,0,5" 
-                         Width="150"/>
-                <TextBox HorizontalAlignment="Center"
-                         Margin="0,5,0,5" 
-                         Width="150"/>
-                <TextBox HorizontalAlignment="Center"
-                         Margin="5,5,0,5" 
-                         Width="150"/>
-            </StackPanel>
-            
-            <CheckBox Content="¿Es Pokemon Shiny? ✨"
-                      HorizontalAlignment="Center"
-                      Margin="10"
-                      Width="200"
-                      Name="Shiny"/>
-            
-            <CheckBox Content="Aceptar condiciones"
-                      HorizontalAlignment="Center"
-                      Margin="0"
-                      Width="200"
-                      Command="{Binding estadoInicialCheckCommand}"
-                      CommandParameter="{Binding ElementName=Condiciones}"
-                      Name="Condiciones"/>
-            
-            <TextBlock Text="{Binding Mensaje}"
-                       Foreground="DarkRed"
-                       HorizontalAlignment="Center"/>
-            
-            <Button Width="200"
-                    Margin="10"
-                    Content="CREAR"
-                    IsVisible="{Binding ModoCrear}"
-                    Command="{Binding MostrarPokeCommand}"
-                    CommandParameter="{Binding ElementName=Condiciones}"
-                    HorizontalAlignment="Center"
-                    HorizontalContentAlignment="Center"/>
-            
-            <Button Width="200"
-                    IsVisible="{Binding ModoEditar}"
-                    Margin="10"
-                    Content="EDITAR"
-                    HorizontalAlignment="Center"
-                    HorizontalContentAlignment="Center"/>
-            
-            <Button Width="200"
-                    IsVisible="{Binding ModoEditar}"
-                    Margin="10"
-                    Content="CANCELAR"
-                    HorizontalAlignment="Center"
-                    HorizontalContentAlignment="Center"/>
-        </StackPanel>
-        </Border>
-        
-        <!-- Fin Contenedor del formulario-->
-                      
-        <!-- Incio Contenedor Consultas -->
+            <!-- Incio Contenedor Consultas -->
         <StackPanel>
            <ComboBox ItemsSource="{Binding Pokemons}"
                      IsVisible="False"/>
@@ -164,7 +64,122 @@
                </ItemsControl.ItemTemplate>
            </ListBox>
         </StackPanel>
-            <!-- Fin Contenedor Consultas -->
+        <!-- Fin Contenedor Consultas -->
+            
+        <!-- Inicio Contenedor del formulario-->
+        <Border Margin="15" 
+                Padding="20"
+                CornerRadius="20"
+                BorderBrush="red"
+                BorderThickness="1"
+                BoxShadow="5 10 20 0 DarkGray">
+            
+        <UniformGrid Columns="3">
+        <StackPanel>
+        <!--Entrada de texto para nombre del pokemon -->
+        <TextBox Width="200"
+                 Margin="10"
+                 Text="{Binding Poke.Nombre}"
+                 HorizontalAlignment="Center"/>
+        
+        
+        <!--selector de tipo -->
+        <ComboBox Width="200" SelectedIndex="0"
+                  SelectedItem="{Binding Poke.Tipo}"
+                  ItemsSource="{Binding ListaTipos}"
+                  HorizontalAlignment="Center"/>
+        
+        <!-- Selector de fecha 
+        <CalendarDatePicker HorizontalAlignment="Center" 
+                            SelectedDate="{Binding Boli.Fecha}"
+                            Width="200">
+           
+        </CalendarDatePicker>-->
+        
+        
+        <TextBlock Text="{Binding Mensaje}"
+                   Foreground="DarkRed"
+                   HorizontalAlignment="Center"/>
+        
+        <Button Width="200"
+                Margin="10"
+                Content="CREAR"
+                IsVisible="{Binding ModoCrear}"
+                Command="{Binding MostrarPokeCommand}"
+                CommandParameter="{Binding ElementName=Condiciones}"
+                HorizontalAlignment="Center"
+                HorizontalContentAlignment="Center"/>
+        
+        <Button Width="200"
+                IsVisible="{Binding ModoEditar}"
+                Margin="10"
+                Content="EDITAR"
+                HorizontalAlignment="Center"
+                HorizontalContentAlignment="Center"/>
+        
+        <Button Width="200"
+                IsVisible="{Binding ModoEditar}"
+                Margin="10"
+                Content="CANCELAR"
+                HorizontalAlignment="Center"
+                HorizontalContentAlignment="Center"/>
+        </StackPanel>
+        <StackPanel>
+        <TextBlock Text="{Binding Greeting}" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"
+                   FontSize="18"
+                   FontWeight="Bold"
+                   FontStyle="Italic"/>   
+        
+        <StackPanel HorizontalAlignment="Center"
+                    IsVisible="{Binding Habilidades}"
+                    Orientation="Vertical" 
+                    Width="200">
+            <TextBox HorizontalAlignment="Center"
+                     Margin="0,5,0,5" 
+                     Width="200"/>
+            <TextBox HorizontalAlignment="Center"
+                     VerticalAlignment="Bottom"
+                     Margin="5,5,0,5" 
+                     Width="200"/>
+            <TextBox HorizontalAlignment="Center"
+                     Margin="0,5,0,5" 
+                     Width="200"/>
+            <TextBox HorizontalAlignment="Center"
+                     Margin="5,5,0,5" 
+                     Width="200"/>
+        </StackPanel>
+        
+        </StackPanel>
+        <StackPanel>
+            <!-- Check para asignar habilidades -->
+            <CheckBox Content="¿Asignar habilidades? 💪"
+                      HorizontalAlignment="Center"
+                      Margin="10"
+                      Width="200"
+                      Command="{Binding asignarHabilidadesCommand}"
+                      Name="Habilidades"/>
+            
+            <CheckBox Content="¿Es Pokemon Shiny? ✨"
+                      HorizontalAlignment="Center"
+                      Margin="10"
+                      Width="200"
+                      Name="Shiny"/>
+            
+            <CheckBox Content="Aceptar condiciones"
+                      HorizontalAlignment="Center"
+                      Margin="0"
+                      Width="200"
+                      Command="{Binding estadoInicialCheckCommand}"
+                      CommandParameter="{Binding ElementName=Condiciones}"
+                      Name="Condiciones"/>
+        
+        </StackPanel>
+        </UniformGrid>
+        </Border>
+        <!-- Fin Contenedor del formulario-->
+        
         
                        
     </UniformGrid>
