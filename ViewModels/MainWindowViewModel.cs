@@ -80,7 +80,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     }
 
-    //Al usar RelayCommand, en la vista aparece comoCargarPokeSeleccionadoCommand
+    //Al usar RelayCommand, en la vista aparece como CargarPokeSeleccionadoCommand
     [RelayCommand]
     public void CargarPokeSeleccionado()
     {
