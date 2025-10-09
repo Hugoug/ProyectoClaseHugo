@@ -113,7 +113,7 @@
         <Border BorderBrush="Black"
                 BorderThickness="1"
                 Width="200"
-                BoxShadow="5 10 20 0 DarkGray">
+                BoxShadow="5 10 20 0 White">
         <Button Width="200"
                 Content="CREAR"
                 IsVisible="{Binding ModoCrear}"
@@ -184,7 +184,7 @@
                       Margin="10"
                       Width="200"
                       Foreground="White"
-                      Name="Habilidades"/>
+                      Name="habilidades"/>
             
             
             <CheckBox Content="¿Es Pokemon Shiny? ✨"
