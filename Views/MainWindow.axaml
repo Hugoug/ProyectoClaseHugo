@@ -63,6 +63,12 @@
                                    <TextBlock HorizontalAlignment="Left"
                                               Margin="0,1,0,0"
                                               FontStyle="Oblique"
+                                              Foreground="#9CA3AF"
+                                              Text="{Binding DiaCreacion, StringFormat='Creación: {0:d}'}"/>
+
+                                   <TextBlock HorizontalAlignment="Left"
+                                              Margin="0,1,0,0"
+                                              FontStyle="Oblique"
                                               Foreground="#FBBF24" 
                                               FontWeight="Bold"
                                               Text="{Binding ShinyText}"/>
@@ -101,6 +107,13 @@
                   Foreground="#1F2937" 
                   Background="White"/>
         
+        <DatePicker Width="200"
+                    SelectedDate="{Binding Poke.DiaCreacion}"
+                    HorizontalAlignment="Center"
+                    Margin="10"
+                    Foreground="White" 
+                    Background="#374151"
+                    BorderThickness="0"/>
         
         <TextBlock Text="{Binding Mensaje}"
                    Foreground="#F87171" 

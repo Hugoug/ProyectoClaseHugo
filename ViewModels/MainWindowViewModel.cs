@@ -19,8 +19,8 @@ public partial class MainWindowViewModel : ViewModelBase
     
     public string Greeting { get; set; } = "¡CREA TU POKESPECIE!";
     
-    // Inicialización simple
-    [ObservableProperty] private Pokemon poke = new();
+    // Inicialización con DateTimeOffset
+    [ObservableProperty] private Pokemon poke = new() { DiaCreacion = DateTimeOffset.Now };
     [ObservableProperty] private Pokemon pokeSeleccionado = new();
     
     public List<string> ListaTipos { get; set; }
@@ -38,12 +38,14 @@ public partial class MainWindowViewModel : ViewModelBase
         poke.Nombre = "Pokugo";
         poke.Tipo = "Fantasma";
         poke.EsShiny = true; 
+        poke.DiaCreacion = DateTimeOffset.Now; 
         Pokemons.Add(poke);
         
         Pokemon poke2 = new Pokemon();
         poke2.Nombre = "ug";
         poke2.Tipo = "Fuego";
         poke2.EsShiny = false; 
+        poke2.DiaCreacion = DateTimeOffset.Now.AddDays(-5); 
         Pokemons.Add(poke2);
     }
 
@@ -84,31 +86,26 @@ public partial class MainWindowViewModel : ViewModelBase
         }
         else
         {
-            Console.WriteLine(Poke.Nombre+" "+Poke.Tipo+" "+Poke.EsShiny); 
+            Console.WriteLine(Poke.Nombre+" "+Poke.Tipo+" "+Poke.EsShiny+" "+Poke.DiaCreacion.ToLocalTime().Date); 
             Mensaje = String.Empty;
             Pokemons.Add(Poke);
             
-            Poke = new Pokemon();
+            // Reseteamos con la fecha actual como DateTimeOffset
+            Poke = new Pokemon() { DiaCreacion = DateTimeOffset.Now };
             
             check.IsChecked = false;
         }
     }
     
-    // NUEVO COMANDO: Cancela la edición y resetea el formulario al modo "Crear"
+    // Comando para resetear y volver al modo CREAR
     [RelayCommand]
     public void CancelarEdicion()
     {
-        // 1. Resetear el formulario con una nueva instancia de Pokemon
-        Poke = new Pokemon();
-        
-        // 2. Limpiar la selección de la lista (para que nada quede marcado)
+        // Reseteamos el formulario y la fecha
+        Poke = new Pokemon() { DiaCreacion = DateTimeOffset.Now }; 
         PokeSeleccionado = null!; 
-        
-        // 3. Volver al modo Crear
         ModoCrear = true;
         ModoEditar = false;
-        
-        // Mensaje de estado
-        Mensaje = "Operación editar cancelada";
+        Mensaje = "Operación cancelada. Listo para crear nuevo Pokémon.";
     }
 }
