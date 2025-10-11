@@ -12,13 +12,14 @@ public partial class MainWindowViewModel : ViewModelBase
 {
    // Se mantiene la estructura de propiedades observables
     [ObservableProperty] private string mensaje  = string.Empty;
-    [ObservableProperty] private bool habilidades = false; // Para IsVisible del StackPanel
+    [ObservableProperty] private bool habilidades = false; 
     [ObservableProperty] private ObservableCollection<Pokemon> pokemons = new();
     [ObservableProperty] private bool modoCrear = true; 
     [ObservableProperty] private bool modoEditar = false;
     
     public string Greeting { get; set; } = "¡CREA TU POKESPECIE!";
     
+    // Inicialización simple
     [ObservableProperty] private Pokemon poke = new();
     [ObservableProperty] private Pokemon pokeSeleccionado = new();
     
@@ -31,19 +32,18 @@ public partial class MainWindowViewModel : ViewModelBase
         CargarPokemons();
     }
     
-    // Se mantiene la estructura solicitada, ajustando el valor a 'EsShiny' (bool)
     private void CargarPokemons()
     {
         Pokemon poke = new Pokemon();
         poke.Nombre = "Pokugo";
         poke.Tipo = "Fantasma";
-        poke.EsShiny = true; // Ajuste por cambio a bool
+        poke.EsShiny = true; 
         Pokemons.Add(poke);
         
         Pokemon poke2 = new Pokemon();
         poke2.Nombre = "ug";
         poke2.Tipo = "Fuego";
-        poke2.EsShiny = false; // Ajuste por cambio a bool
+        poke2.EsShiny = false; 
         Pokemons.Add(poke2);
     }
 
@@ -55,9 +55,6 @@ public partial class MainWindowViewModel : ViewModelBase
         ModoEditar = true;
     }
 
-    // ELIMINADO: asignarHabilidades (se reemplaza por Binding en XAML)
-    // ELIMINADO: estadoInicialCheck (contenía lógica de UI y se elimina)
-    
     private void CargarCombo()
     {
         ListaTipos =new()
@@ -68,22 +65,18 @@ public partial class MainWindowViewModel : ViewModelBase
         Poke.Tipo = ListaTipos[0];
     }
 
-    // Método MANTENIDO y CORREGIDO (sin manipulación de UI)
     [RelayCommand]
     public void MostrarPoke(object parameter)
     {
-        // Se mantiene el casting y el uso del parámetro object
         CheckBox check = (CheckBox)parameter;
         
         if (check.IsChecked is false)
         {
             Mensaje = "Debes marcar el check";
             Console.WriteLine("Debes marcar el check");
-            // Lógica de UI (Foreground, FontWeight) ELIMINADA.
             return;
         }
         
-        // Se mantiene string.IsNullOrWhiteSpace
         if (string.IsNullOrWhiteSpace(Poke.Nombre))
         {
             Mensaje = "Debes nombrar a tu Pokemon";
@@ -91,13 +84,31 @@ public partial class MainWindowViewModel : ViewModelBase
         }
         else
         {
-            // SE CREA EL POKEMON
-            // Se mantiene la concatenación, ajustando la propiedad 'Shiny' a 'EsShiny'
             Console.WriteLine(Poke.Nombre+" "+Poke.Tipo+" "+Poke.EsShiny); 
             Mensaje = String.Empty;
             Pokemons.Add(Poke);
+            
             Poke = new Pokemon();
+            
             check.IsChecked = false;
         }
+    }
+    
+    // NUEVO COMANDO: Cancela la edición y resetea el formulario al modo "Crear"
+    [RelayCommand]
+    public void CancelarEdicion()
+    {
+        // 1. Resetear el formulario con una nueva instancia de Pokemon
+        Poke = new Pokemon();
+        
+        // 2. Limpiar la selección de la lista (para que nada quede marcado)
+        PokeSeleccionado = null!; 
+        
+        // 3. Volver al modo Crear
+        ModoCrear = true;
+        ModoEditar = false;
+        
+        // Mensaje de estado
+        Mensaje = "Operación editar cancelada";
     }
 }
