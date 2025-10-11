@@ -10,16 +10,16 @@ namespace ProyectoClaseHugo.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-   // Se mantiene la estructura de propiedades observables
+    //Propiedas observables
     [ObservableProperty] private string mensaje  = string.Empty;
     [ObservableProperty] private bool habilidades = false; 
     [ObservableProperty] private ObservableCollection<Pokemon> pokemons = new();
     [ObservableProperty] private bool modoCrear = true; 
     [ObservableProperty] private bool modoEditar = false;
     
+    //Titulo del formulario
     public string Greeting { get; set; } = "¡CREA TU POKESPECIE!";
     
-    // Inicialización con DateTimeOffset
     [ObservableProperty] private Pokemon poke = new() { DiaCreacion = DateTimeOffset.Now };
     [ObservableProperty] private Pokemon pokeSeleccionado = new();
     
@@ -32,6 +32,7 @@ public partial class MainWindowViewModel : ViewModelBase
         CargarPokemons();
     }
     
+    //Pokemons de prueba o ejemplo ya cargados
     private void CargarPokemons()
     {
         Pokemon poke = new Pokemon();
@@ -42,11 +43,18 @@ public partial class MainWindowViewModel : ViewModelBase
         Pokemons.Add(poke);
         
         Pokemon poke2 = new Pokemon();
-        poke2.Nombre = "ug";
+        poke2.Nombre = "Fran";
         poke2.Tipo = "Fuego";
         poke2.EsShiny = false; 
-        poke2.DiaCreacion = DateTimeOffset.Now.AddDays(-5); 
+        poke2.DiaCreacion = DateTimeOffset.Now; 
         Pokemons.Add(poke2);
+        
+        Pokemon poke3 = new Pokemon();
+        poke3.Nombre = "Pepe";
+        poke3.Tipo = "Tierra";
+        poke3.EsShiny = false; 
+        poke3.DiaCreacion = DateTimeOffset.Now; 
+        Pokemons.Add(poke3);
     }
 
     [RelayCommand]
@@ -57,16 +65,18 @@ public partial class MainWindowViewModel : ViewModelBase
         ModoEditar = true;
     }
 
+    // Lista de todos los tipos
     private void CargarCombo()
     {
-        ListaTipos =new()
+        ListaTipos = new()
         {
             "Agua", "Acero", "Bicho", "Dragon", "Electrico", "Fantasma", "Fuego", "Hada", "Hielo",
-            "Lucha", "Normal", "Sinestro", "Planta", "Psiquico", "Roca", "Tierra", "Volador", "Veneno"  
+            "Lucha", "Normal", "Sinestro", "Planta", "Psiquico", "Roca", "Tierra", "Volador", "Veneno"
         };
         Poke.Tipo = ListaTipos[0];
     }
 
+    // Mostrar Pokemon creado en la lista, con validaciones
     [RelayCommand]
     public void MostrarPoke(object parameter)
     {
@@ -74,8 +84,8 @@ public partial class MainWindowViewModel : ViewModelBase
         
         if (check.IsChecked is false)
         {
-            Mensaje = "Debes marcar el check";
-            Console.WriteLine("Debes marcar el check");
+            Mensaje = "Debes aceptar las condiciones";
+            Console.WriteLine("Debes aceptar las condiciones");
             return;
         }
         
@@ -90,22 +100,20 @@ public partial class MainWindowViewModel : ViewModelBase
             Mensaje = String.Empty;
             Pokemons.Add(Poke);
             
-            // Reseteamos con la fecha actual como DateTimeOffset
             Poke = new Pokemon() { DiaCreacion = DateTimeOffset.Now };
             
             check.IsChecked = false;
         }
     }
     
-    // Comando para resetear y volver al modo CREAR
+    // Cancelar operacion editar
     [RelayCommand]
     public void CancelarEdicion()
     {
-        // Reseteamos el formulario y la fecha
         Poke = new Pokemon() { DiaCreacion = DateTimeOffset.Now }; 
         PokeSeleccionado = null!; 
         ModoCrear = true;
         ModoEditar = false;
-        Mensaje = "Operación cancelada. Listo para crear nuevo Pokémon.";
+        Mensaje = "Operación editar cancelada";
     }
 }
