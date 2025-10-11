@@ -11,16 +11,11 @@
         Title="ProyectoClaseHugo">
 
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
     
-
     <UniformGrid Rows="2" Background="Black">
-       <!-- Background="Black"-->
             
-            <!-- Incio Contenedor Consultas -->
         <StackPanel>
            <ComboBox ItemsSource="{Binding Pokemons}"
                      IsVisible="False"/>
@@ -45,101 +40,105 @@
                        <Border Margin="10" 
                                Padding="15"
                                CornerRadius="10"
-                               BorderBrush="OrangeRed"
-                               Background="Orange"
+                               BorderBrush="#4B5563" 
+                               Background="#111827" 
                                BorderThickness="1"
-                               BoxShadow="5 5 10 0 Yellow">
-                           <StackPanel Orientation="Vertical">
+                               BoxShadow="0 0 5 0 #4B5563">
+                           <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                <Image Width="60" 
-                                      Source="avares://ProyectoClaseHugo/Assets/logoPokemon.png"/>
-
-                               <TextBlock HorizontalAlignment="Center"
-                                          Margin="2"
-                                          FontStyle="Oblique"
-                                          Text="{Binding Nombre}"/>
-                               <TextBlock HorizontalAlignment="Center"
-                                          Margin="1"
-                                          FontStyle="Oblique"
-                                          Text="{Binding Tipo}"/>
-                               <TextBlock HorizontalAlignment="Center"
-                                          Margin="1"
-                                          FontStyle="Oblique"
-                                          Text="{Binding Shiny}"/>
+                                      Source="avares://ProyectoClaseHugo/Assets/logoPokemon.png"
+                                      Margin="0,0,10,0"/> <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                   <TextBlock HorizontalAlignment="Left"
+                                              Margin="0,2,0,0"
+                                              FontStyle="Oblique"
+                                              Foreground="White" 
+                                              Text="{Binding Nombre}"/>
+                                   <TextBlock HorizontalAlignment="Left"
+                                              Margin="0,1,0,0"
+                                              FontStyle="Oblique"
+                                              Foreground="#9CA3AF" 
+                                              Text="{Binding Tipo}"/>
+                                   <TextBlock HorizontalAlignment="Left"
+                                              Margin="0,1,0,0"
+                                              FontStyle="Oblique"
+                                              Foreground="#FBBF24" 
+                                              FontWeight="Bold"
+                                              Text="{Binding EsShiny}"/>
+                               </StackPanel>
                            </StackPanel>
-                       </Border>
+                           </Border>
                    </DataTemplate>
                </ItemsControl.ItemTemplate>
            </ListBox>
         </StackPanel>
-        <!-- Fin Contenedor Consultas -->
             
-        <!-- Inicio Contenedor del formulario-->
         <Border Margin="15" 
                 Padding="20"
                 CornerRadius="20"
-                BorderBrush="red"
-                Background="#35A5FB"
+                BorderBrush="#3B82F6" 
+                Background="#1F2937" 
                 BorderThickness="1"
-                BoxShadow="5 10 20 0 White">
+                BoxShadow="0 0 10 0 #3B82F6">
             
         <UniformGrid Columns="3">
+        
         <StackPanel>
-        <!--Entrada de texto para nombre del pokemon -->
         <TextBox Width="200"
                  Margin="10"
                  Text="{Binding Poke.Nombre}"
-                 HorizontalAlignment="Center"/>
+                 HorizontalAlignment="Center"
+                 Foreground="#1F2937" 
+                 Background="White"/>
         
         
-        <!--selector de tipo -->
         <ComboBox Width="200" SelectedIndex="0"
                   SelectedItem="{Binding Poke.Tipo}"
                   ItemsSource="{Binding ListaTipos}"
-                  HorizontalAlignment="Center"/>
-        
-        <!-- Selector de fecha 
-        <CalendarDatePicker HorizontalAlignment="Center" 
-                            SelectedDate="{Binding Boli.Fecha}"
-                            Width="200">
-           
-        </CalendarDatePicker>-->
-        
+                  HorizontalAlignment="Center"
+                  Margin="10"
+                  Foreground="#1F2937" 
+                  Background="White"/>
         
         <TextBlock Text="{Binding Mensaje}"
-                   Foreground="DarkRed"
+                   Foreground="#F87171" 
                    HorizontalAlignment="Center"
                    Margin="10"/>
         
-        <Border BorderBrush="Black"
-                BorderThickness="1"
-                Width="200"
-                BoxShadow="5 10 20 0 White">
-        <Button Width="200"
-                Content="CREAR"
-                IsVisible="{Binding ModoCrear}"
-                Command="{Binding MostrarPokeCommand}"
-                CommandParameter="{Binding ElementName=Condiciones}"
-                HorizontalAlignment="Center"
-                HorizontalContentAlignment="Center"/>
+        <Border BorderBrush="#3B82F6"
+                BorderThickness="0"
+                Width="200">
+            <Button Width="200"
+                    Content="CREAR"
+                    IsVisible="{Binding ModoCrear}"
+                    Command="{Binding MostrarPokeCommand}"
+                    CommandParameter="{Binding ElementName=Condiciones}"
+                    HorizontalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    Background="#3B82F6"
+                    Foreground="White"
+                    CornerRadius="0"/>
         </Border>
-        
-        
         
         <Button Width="200"
                 IsVisible="{Binding ModoEditar}"
                 Margin="10"
                 Content="EDITAR"
                 HorizontalAlignment="Center"
-                HorizontalContentAlignment="Center"/>
+                HorizontalContentAlignment="Center"
+                Background="#10B981"
+                Foreground="White"
+                CornerRadius="0"/> 
       
-        
         
         <Button Width="200"
                 IsVisible="{Binding ModoEditar}"
                 Margin="10"
                 Content="CANCELAR"
                 HorizontalAlignment="Center"
-                HorizontalContentAlignment="Center"/>
+                HorizontalContentAlignment="Center"
+                Background="#F87171"
+                Foreground="White"
+                CornerRadius="0"/>
         
         </StackPanel>
         <StackPanel>
@@ -147,7 +146,7 @@
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center"
                    FontSize="18"
-                   Foreground="White"
+                   Foreground="#FBBF24" 
                    FontWeight="Bold"
                    FontStyle="Italic"/>   
         
@@ -155,35 +154,44 @@
                  HorizontalAlignment="Center" 
                  Width="240" Height="50" 
                  StrokeThickness="1" 
-                 Stroke="OrangeRed"/>
+                 Stroke="#FBBF24"/>
         
         <StackPanel HorizontalAlignment="Center"
                     IsVisible="{Binding Habilidades}"
                     Orientation="Vertical" 
-                    Width="200">
+                    Width="200"
+                    Margin="0, 15, 0, 0">
             <TextBox HorizontalAlignment="Center"
                      Margin="0,5,0,5" 
-                     Width="200"/>
+                     Width="200"
+                     Foreground="White"
+                     Background="#374151"/>
             <TextBox HorizontalAlignment="Center"
                      VerticalAlignment="Bottom"
                      Margin="5,5,0,5" 
-                     Width="200"/>
+                     Width="200"
+                     Foreground="White"
+                     Background="#374151"/>
             <TextBox HorizontalAlignment="Center"
                      Margin="0,5,0,5" 
-                     Width="200"/>
+                     Width="200"
+                     Foreground="White"
+                     Background="#374151"/>
             <TextBox HorizontalAlignment="Center"
                      Margin="5,5,0,5" 
-                     Width="200"/>
+                     Width="200"
+                     Foreground="White"
+                     Background="#374151"/>
         </StackPanel>
         
         </StackPanel>
         <StackPanel>
-            <!-- Check para asignar habilidades -->
             <CheckBox Content="¿Asignar habilidades? 💪"
                       HorizontalAlignment="Center"
                       Margin="10"
                       Width="200"
                       Foreground="White"
+                      IsChecked="{Binding Habilidades}"
                       Name="habilidades"/>
             
             
@@ -192,6 +200,7 @@
                       Margin="10"
                       Width="200"
                       Foreground="White"
+                      IsChecked="{Binding Poke.EsShiny}"
                       Name="Shiny"/>
             
             <CheckBox Content="Aceptar condiciones"
@@ -199,17 +208,11 @@
                       Margin="0"
                       Width="200"
                       Foreground="White"
-                      Command="{Binding estadoInicialCheckCommand}"
-                      CommandParameter="{Binding ElementName=Condiciones}"
                       Name="Condiciones"/>
         
         </StackPanel>
         </UniformGrid>
         </Border>
-        <!-- Fin Contenedor del formulario-->
-        
-        
-                       
     </UniformGrid>
     
 </Window>

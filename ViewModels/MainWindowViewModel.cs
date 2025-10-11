@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Avalonia.Controls;
-using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ProyectoClaseHugo.Models;
@@ -11,29 +10,19 @@ namespace ProyectoClaseHugo.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-   // Tenemos que poner el decorador
-    // La variable u objeto tiene que ser privado
-    // Tiene que empezar por minuscula
-    // No tiene que tener get y set
-    [ObservableProperty]
-    private string mensaje  = string.Empty;
-
-    [ObservableProperty] private bool habilidades = false;
-    
+   // Se mantiene la estructura de propiedades observables
+    [ObservableProperty] private string mensaje  = string.Empty;
+    [ObservableProperty] private bool habilidades = false; // Para IsVisible del StackPanel
     [ObservableProperty] private ObservableCollection<Pokemon> pokemons = new();
-
     [ObservableProperty] private bool modoCrear = true; 
     [ObservableProperty] private bool modoEditar = false;
     
+    public string Greeting { get; set; } = "¡CREA TU POKESPECIE!";
     
-    public string Greeting { set; get; } = "¡CREA TU POKESPECIE!";
-    
-    [ObservableProperty]
-    private Pokemon poke = new();
-    
+    [ObservableProperty] private Pokemon poke = new();
     [ObservableProperty] private Pokemon pokeSeleccionado = new();
     
-    public List<string> ListaTipos { set; get; }
+    public List<string> ListaTipos { get; set; }
 
     //Constructor
     public MainWindowViewModel()
@@ -42,45 +31,22 @@ public partial class MainWindowViewModel : ViewModelBase
         CargarPokemons();
     }
     
-   
-
-    /*[RelayCommand]
-    public void ComprobarFecha()
-    {
-        CheckDate();
-    }*/
-    
-   /* private bool CheckDate()
-    {
-        if (Poke.Fecha < DateTime.Today)
-        {
-            Mensaje = "La fecha no debe ser inferior a hoy";
-            return false;
-        }
-        else
-        {
-            Mensaje = "";
-            return true;
-        }
-    }*/
+    // Se mantiene la estructura solicitada, ajustando el valor a 'EsShiny' (bool)
     private void CargarPokemons()
     {
         Pokemon poke = new Pokemon();
         poke.Nombre = "Pokugo";
         poke.Tipo = "Fantasma";
-        poke.Shiny = "Shiny";
+        poke.EsShiny = true; // Ajuste por cambio a bool
         Pokemons.Add(poke);
         
         Pokemon poke2 = new Pokemon();
         poke2.Nombre = "ug";
         poke2.Tipo = "Fuego";
-        poke2.Shiny = "No Shiny";
+        poke2.EsShiny = false; // Ajuste por cambio a bool
         Pokemons.Add(poke2);
-        
-
     }
 
-    //Al usar RelayCommand, en la vista aparece como CargarPokeSeleccionadoCommand
     [RelayCommand]
     public void CargarPokeSeleccionado()
     {
@@ -89,18 +55,8 @@ public partial class MainWindowViewModel : ViewModelBase
         ModoEditar = true;
     }
 
-    [RelayCommand]
-    public void asignarHabilidades()
-    {
-        if (Habilidades)
-        {
-            Habilidades = false;
-        }
-        else
-        {
-            Habilidades = true;
-        }
-    }
+    // ELIMINADO: asignarHabilidades (se reemplaza por Binding en XAML)
+    // ELIMINADO: estadoInicialCheck (contenía lógica de UI y se elimina)
     
     private void CargarCombo()
     {
@@ -112,46 +68,22 @@ public partial class MainWindowViewModel : ViewModelBase
         Poke.Tipo = ListaTipos[0];
     }
 
-    [RelayCommand]
-    public void estadoInicialCheck(Object parameter)
-    {
-        // Castear el parametro a checkbox
-        CheckBox check = (CheckBox)parameter;
-        
-        //Establecer valores iniciales
-        if (check.IsChecked == true)
-        {
-            check.Foreground = Brushes.Black;
-            check.FontWeight = FontWeight.Normal;
-        }
-        else
-        {
-            check.Foreground = Brushes.Red;
-            check.FontWeight = FontWeight.Bold;
-        }
-
-    }
-    
+    // Método MANTENIDO y CORREGIDO (sin manipulación de UI)
     [RelayCommand]
     public void MostrarPoke(object parameter)
     {
-        /* Si es falso (devuelve false), no continuo creando
-        if (!CheckDate())
-        {
-            return;
-        }*/
-        
+        // Se mantiene el casting y el uso del parámetro object
         CheckBox check = (CheckBox)parameter;
         
         if (check.IsChecked is false)
         {
             Mensaje = "Debes marcar el check";
             Console.WriteLine("Debes marcar el check");
-            check.Foreground = Brushes.Red;
-            check.FontWeight = FontWeight.Bold;
+            // Lógica de UI (Foreground, FontWeight) ELIMINADA.
             return;
         }
         
+        // Se mantiene string.IsNullOrWhiteSpace
         if (string.IsNullOrWhiteSpace(Poke.Nombre))
         {
             Mensaje = "Debes nombrar a tu Pokemon";
@@ -160,12 +92,12 @@ public partial class MainWindowViewModel : ViewModelBase
         else
         {
             // SE CREA EL POKEMON
-            Console.WriteLine(Poke.Nombre+" "+Poke.Tipo+" "+Poke.Shiny);
+            // Se mantiene la concatenación, ajustando la propiedad 'Shiny' a 'EsShiny'
+            Console.WriteLine(Poke.Nombre+" "+Poke.Tipo+" "+Poke.EsShiny); 
             Mensaje = String.Empty;
             Pokemons.Add(Poke);
             Poke = new Pokemon();
             check.IsChecked = false;
         }
-        
     }
 }
