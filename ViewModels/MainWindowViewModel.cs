@@ -20,7 +20,7 @@ public partial class MainWindowViewModel : ViewModelBase
     //Titulo del formulario
     public string Greeting { get; set; } = "¡CREA TU POKESPECIE!";
     
-    [ObservableProperty] private Pokemon poke = new() { DiaCreacion = DateTimeOffset.Now };
+    [ObservableProperty] private Pokemon poke = new() { DiaCreacion = DateTime.Now };
     [ObservableProperty] private Pokemon pokeSeleccionado = new();
     
     public List<string> ListaTipos { get; set; }
@@ -39,21 +39,21 @@ public partial class MainWindowViewModel : ViewModelBase
         poke.Nombre = "Pokugo";
         poke.Tipo = "Fantasma";
         poke.EsShiny = true; 
-        poke.DiaCreacion = DateTimeOffset.Now; 
+        poke.DiaCreacion = DateTime.Now; 
         Pokemons.Add(poke);
         
         Pokemon poke2 = new Pokemon();
         poke2.Nombre = "Fran";
         poke2.Tipo = "Fuego";
         poke2.EsShiny = false; 
-        poke2.DiaCreacion = DateTimeOffset.Now; 
+        poke2.DiaCreacion = DateTime.Now; 
         Pokemons.Add(poke2);
         
         Pokemon poke3 = new Pokemon();
         poke3.Nombre = "Pepe";
         poke3.Tipo = "Tierra";
         poke3.EsShiny = false; 
-        poke3.DiaCreacion = DateTimeOffset.Now; 
+        poke3.DiaCreacion = DateTime.Now; 
         Pokemons.Add(poke3);
     }
 
@@ -100,7 +100,7 @@ public partial class MainWindowViewModel : ViewModelBase
             Mensaje = String.Empty;
             Pokemons.Add(Poke);
             
-            Poke = new Pokemon() { DiaCreacion = DateTimeOffset.Now };
+            Poke = new Pokemon() { DiaCreacion = DateTime.Now };
             
             check.IsChecked = false;
         }
@@ -110,7 +110,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     public void CancelarEdicion()
     {
-        Poke = new Pokemon() { DiaCreacion = DateTimeOffset.Now }; 
+        Poke = new Pokemon() { DiaCreacion = DateTime.Now }; 
         PokeSeleccionado = null!; 
         ModoCrear = true;
         ModoEditar = false;

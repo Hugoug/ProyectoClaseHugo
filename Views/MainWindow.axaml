@@ -115,7 +115,7 @@
                   Foreground="#1F2937" 
                   Background="White"/>
         
-        <DatePicker Width="200"
+        <CalendarDatePicker Width="200"
                     SelectedDate="{Binding Poke.DiaCreacion}"
                     HorizontalAlignment="Center"
                     Margin="10"

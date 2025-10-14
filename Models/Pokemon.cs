@@ -12,7 +12,7 @@ public class Pokemon
     
     public bool AsignarHabilidades { get; set; } = false; 
     
-    public DateTimeOffset DiaCreacion { get; set; } = DateTimeOffset.Now;
+    public DateTime DiaCreacion { get; set; } = DateTime.Now;
     
     public string Shiny => EsShiny ? "Shiny" : "No Shiny";
 
